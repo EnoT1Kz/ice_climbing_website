@@ -131,113 +131,145 @@ nav a:hover::after{
 
 /* ===== HERO ===== */
 
+/* ===== MEGA HERO ===== */
+
 .hero{
+
+    position:relative;
+
     min-height:100vh;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    text-align:center;
+    padding:
+    140px 80px 100px;
 
-    padding:140px 20px 100px;
-
-    position:relative;
     overflow:hidden;
-}
-
-/* ICE LIGHTS */
-
-.hero::before{
-    content:'';
-    position:absolute;
-
-    width:800px;
-    height:800px;
 
     background:
-    radial-gradient(circle,#5fd2ff33,transparent 70%);
 
-    top:-250px;
-    right:-250px;
+    linear-gradient(
+        rgba(2,12,22,0.72),
+        rgba(2,12,22,0.82)
+    ),
 
-    filter:blur(40px);
+    url('https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1800&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
 }
 
-.hero::after{
-    content:'';
-    position:absolute;
+/* OVERLAY */
 
-    width:700px;
-    height:700px;
+.hero-overlay{
+
+    position:absolute;
+    inset:0;
 
     background:
-    radial-gradient(circle,#ffffff10,transparent 70%);
 
-    bottom:-250px;
-    left:-250px;
+    radial-gradient(
+        circle at top right,
+        rgba(80,190,255,0.18),
+        transparent 30%
+    ),
 
-    filter:blur(50px);
+    radial-gradient(
+        circle at bottom left,
+        rgba(255,255,255,0.06),
+        transparent 30%
+    );
 }
+
+/* CONTENT */
 
 .hero-content{
+
     position:relative;
     z-index:2;
-    max-width:1100px;
+
+    width:100%;
+    max-width:1400px;
+
+    display:grid;
+
+    grid-template-columns:
+    1.2fr 0.8fr;
+
+    align-items:center;
+
+    gap:60px;
+}
+
+/* LEFT SIDE */
+
+.hero-left{
+
+    max-width:760px;
 }
 
 .hero h1{
 
-    font-size:110px;
-    line-height:0.95;
-    margin-bottom:35px;
+    font-size:92px;
+    line-height:0.92;
 
     font-weight:900;
 
-    letter-spacing:4px;
+    margin-bottom:35px;
+
+    letter-spacing:2px;
 
     color:white;
 
     text-shadow:
-    0 0 8px rgba(180,230,255,0.35),
-    0 0 18px rgba(0,140,255,0.25);
-
-}
-
-/* 3D ICE TEXT */
-
-.hero h1 span{
-    display:block;
-
-    transform:
-    perspective(500px)
-    rotateX(6deg);
-
+    0 0 30px rgba(120,220,255,0.18);
 }
 
 .hero p{
+
     font-size:22px;
     line-height:1.8;
 
-    color:  #cfe9ff;
+    color:#d5ebff;
 
-    max-width:850px;
-    margin:auto auto 45px;
+    margin-bottom:45px;
+
+    max-width:700px;
 }
 
-.hero button{
+/* BUTTONS */
+
+.hero-buttons{
+
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.hero-buttons a{
 
     padding:20px 46px;
 
-    border:none;
     border-radius:60px;
 
     font-size:18px;
     font-weight:700;
 
     color:white;
+    text-decoration:none;
 
-    cursor:pointer;
+    transition:0.4s;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* MAIN BUTTON */
+
+.hero-buttons a:first-child{
 
     background:
     linear-gradient(
@@ -249,11 +281,9 @@ nav a:hover::after{
     box-shadow:
     0 0 30px rgba(0,170,255,0.35),
     inset 0 0 20px rgba(255,255,255,0.25);
-
-    transition:0.4s;
 }
 
-.hero button:hover{
+.hero-buttons a:first-child:hover{
 
     transform:
     translateY(-5px)
@@ -262,6 +292,153 @@ nav a:hover::after{
     box-shadow:
     0 0 45px rgba(0,180,255,0.55),
     inset 0 0 25px rgba(255,255,255,0.3);
+}
+
+/* SECOND BUTTON */
+
+.hero-buttons a:last-child{
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border:
+    1px solid rgba(255,255,255,0.14);
+
+    backdrop-filter:blur(12px);
+}
+
+.hero-buttons a:last-child:hover{
+
+    background:
+    rgba(255,255,255,0.14);
+
+    transform:
+    translateY(-5px);
+}
+
+/* HERO CARD */
+
+.hero-card{
+
+    width:360px;
+
+    padding:35px;
+
+    border-radius:35px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.14),
+        rgba(255,255,255,0.05)
+    );
+
+    backdrop-filter:blur(22px);
+
+    border:
+    1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.35);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero-card::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    background:
+    radial-gradient(circle,#7fdcff22,transparent 70%);
+
+    top:-80px;
+    right:-80px;
+}
+
+.hero-card-label{
+
+    color:#8fdcff;
+
+    font-size:14px;
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:20px;
+}
+
+.hero-card h3{
+
+    font-size:36px;
+
+    margin-bottom:18px;
+
+    color:white;
+}
+
+.hero-card p{
+
+    margin-bottom:25px;
+
+    color:#cfe7ff;
+}
+
+.hero-card-line{
+
+    width:100%;
+    height:1px;
+
+    background:
+    rgba(255,255,255,0.1);
+
+    margin-bottom:20px;
+}
+
+.hero-card span{
+
+    color:#8fdcff;
+}
+
+/* SCROLL INDICATOR */
+
+.scroll-indicator{
+
+    position:absolute;
+
+    bottom:30px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:32px;
+
+    color:#b8e8ff;
+
+    animation:
+    floatArrow 2s infinite;
+}
+
+@keyframes floatArrow{
+
+    0%{
+        transform:translateX(-50%) translateY(0);
+    }
+
+    50%{
+        transform:translateX(-50%) translateY(10px);
+    }
+
+    100%{
+        transform:translateX(-50%) translateY(0);
+    }
+
 }
 
 /* ===== SECTION ===== */
@@ -471,7 +648,6 @@ ICE CLIMBING
 <a href="#about">О спорте</a>
 <a href="#events">Соревнования</a>
 <a href="#gallery">Галерея</a>
-<a href="#news">Новости</a>
 <a href="#contacts">Контакты</a>
 </nav>
 
@@ -479,23 +655,68 @@ ICE CLIMBING
 
 <section class="hero" id="home">
 
+<div class="hero-overlay"></div>
+
 <div class="hero-content">
 
-<h1>
-<span>ЛЕДОЛАЗАНИЕ</span>
-</h1>
+    <div class="hero-left">
 
-<p>
-Современный спорт высоты, силы и льда.  
-Соревнования, новости, спортсмены и мир вертикального экстрима.
-</p>
+        <h1>
+            ЛЕДОЛАЗАНИЕ<br>
+            РОССИИ
+        </h1>
 
-<a href="https://www.youtube.com/@IceClimbingRu" target="_blank">
-    <button>
-        Смотреть соревнования
-    </button>
-</a>
+        <p>
+            Официальный портал ледолазания России:
+            соревнования, результаты, спортсмены,
+            новости и развитие ледового спорта.
+        </p>
 
+        <div class="hero-buttons">
+
+            <a href="https://youtube.com"
+               target="_blank">
+
+               Смотреть соревнования
+
+            </a>
+
+            <a href="#events">
+
+               Ближайшие старты
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="hero-card-label">
+            Ближайшее событие
+        </div>
+
+        <h3>
+            Кубок России 2026
+        </h3>
+
+        <p>
+            Москва · 12–14 февраля
+        </p>
+
+        <div class="hero-card-line"></div>
+
+        <span>
+            Скорость · Трудность
+        </span>
+
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    ↓
 </div>
 
 </section>
@@ -579,39 +800,6 @@ ICE CLIMBING
 <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1200&auto=format&fit=crop">
 
 <img src="https://images.unsplash.com/photo-1516239324214-58c0d3dc9c3d?q=80&w=1200&auto=format&fit=crop">
-
-</div>
-
-</section>
-
-<section class="reveal" id="news">
-
-<h2 class="section-title">
-Новости
-</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Новый этап Кубка мира</h3>
-<p>
-В Швейцарии стартовал новый этап UIAA Ice Climbing World Cup с участием спортсменов из 20 стран.
-</p>
-</div>
-
-<div class="card">
-<h3>Ледолазание среди молодежи</h3>
-<p>
-Федерация объявила о запуске новой программы подготовки молодых спортсменов по всей стране.
-</p>
-</div>
-
-<div class="card">
-<h3>Открытие ледового центра</h3>
-<p>
-В Москве открыт новый современный центр подготовки ледолазов с трассами международного уровня.
-</p>
-</div>
 
 </div>
 
