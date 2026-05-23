@@ -456,6 +456,80 @@ footer{
 
 }
 
+/* ===== ACTIVE NAV ===== */
+
+nav a.active{
+    color:white;
+}
+
+nav a.active::after{
+    width:100%;
+}
+
+/* ===== REVEAL ANIMATION ===== */
+
+.reveal{
+
+    opacity:0;
+    transform:translateY(80px);
+
+    transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.reveal.active-section{
+
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+
+@media(max-width:768px){
+
+    .hero{
+        min-height:90vh;
+        padding-top:180px;
+    }
+
+    .hero h1{
+        font-size:54px;
+        letter-spacing:2px;
+    }
+
+    .hero p{
+        font-size:18px;
+        line-height:1.6;
+    }
+
+    .hero button{
+        width:100%;
+        max-width:320px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:35px 28px;
+    }
+
+    .gallery img{
+        height:240px;
+    }
+
+    nav{
+        gap:15px;
+    }
+
+    nav a{
+        font-size:14px;
+    }
+
+}
+
 </style>
 </head>
 <body>
@@ -471,12 +545,13 @@ ICE CLIMBING
 <a href="#about">О спорте</a>
 <a href="#events">Соревнования</a>
 <a href="#gallery">Галерея</a>
+<a href="#news">Новости</a>
 <a href="#contacts">Контакты</a>
 </nav>
 
 </header>
 
-<section class="hero" id="home">
+<section class="reveal" class="hero" id="home">
 
 <div class="hero-content">
 
@@ -581,6 +656,39 @@ ICE CLIMBING
 
 </section>
 
+<section class="reveal" id="news">
+
+<h2 class="section-title">
+Новости
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Новый этап Кубка мира</h3>
+<p>
+В Швейцарии стартовал новый этап UIAA Ice Climbing World Cup с участием спортсменов из 20 стран.
+</p>
+</div>
+
+<div class="card">
+<h3>Ледолазание среди молодежи</h3>
+<p>
+Федерация объявила о запуске новой программы подготовки молодых спортсменов по всей стране.
+</p>
+</div>
+
+<div class="card">
+<h3>Открытие ледового центра</h3>
+<p>
+В Москве открыт новый современный центр подготовки ледолазов с трассами международного уровня.
+</p>
+</div>
+
+</div>
+
+</section>
+
 <section class="reveal" id="contacts">
 
 <h2 class="section-title">
@@ -635,6 +743,64 @@ YouTube: Ice Climbing TV
 </p>
 
 </footer>
+
+<script>
+
+/* ===== ACTIVE NAVIGATION ===== */
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop;
+
+        if(pageYOffset >= sectionTop - 200){
+            current = section.getAttribute("id");
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href") === "#" + current){
+            link.classList.add("active");
+        }
+
+    });
+
+});
+
+/* ===== REVEAL ANIMATION ===== */
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealSections(){
+
+    reveals.forEach(section => {
+
+        const windowHeight = window.innerHeight;
+        const revealTop = section.getBoundingClientRect().top;
+
+        if(revealTop < windowHeight - 100){
+            section.classList.add("active-section");
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", revealSections);
+
+revealSections();
+
+</script>
 
 </body>
 </html>
