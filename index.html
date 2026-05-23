@@ -633,6 +633,28 @@ footer{
 
 }
 
+/* ===== REVEAL ANIMATIONS ===== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+    translateY(80px);
+
+    transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:
+    translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -859,6 +881,38 @@ YouTube: Ice Climbing TV
 </p>
 
 </footer>
+
+<script>
+
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+
+    reveals.forEach(section => {
+
+        const windowHeight = window.innerHeight;
+
+        const revealTop =
+        section.getBoundingClientRect().top;
+
+        if(revealTop < windowHeight - 100){
+
+            section.classList.add('active');
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    'scroll',
+    revealOnScroll
+);
+
+revealOnScroll();
+
+</script>
 
 </body>
 </html>
