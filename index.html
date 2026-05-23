@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ледолазание</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    color:white;
+    overflow-x:hidden;
+    background:
+    radial-gradient(circle at top left,#58c6ff33,transparent 25%),
+    radial-gradient(circle at top right,#00a2ff22,transparent 30%),
+    radial-gradient(circle at bottom left,#80dfff22,transparent 25%),
+    linear-gradient(
+        135deg,
+        #03111f 0%,
+        #08233f 25%,
+        #0b3f6e 50%,
+        #08233f 75%,
+        #03111f 100%
+    );
+
+    background-attachment:fixed;
+}
+
+/* ===== GLOBAL LIGHT EFFECT ===== */
+
+body::before{
+    content:'';
+    position:fixed;
+    width:1200px;
+    height:1200px;
+    background:radial-gradient(circle,#69d2ff18,transparent 50%);
+    top:-400px;
+    left:-300px;
+    z-index:-1;
+}
+
+body::after{
+    content:'';
+    position:fixed;
+    width:900px;
+    height:900px;
+    background:radial-gradient(circle,#ffffff10,transparent 70%);
+    bottom:-300px;
+    right:-200px;
+    z-index:-1;
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:22px 70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+
+    z-index:1000;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:2px;
+
+    background:linear-gradient(to right,#ffffff,#8fdcff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+nav{
+    display:flex;
+    gap:40px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#dcefff;
+    font-weight:600;
+    position:relative;
+    transition:0.3s;
+}
+
+nav a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0%;
+    height:2px;
+
+    background:#66d9ff;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:white;
+}
+
+nav a:hover::after{
+    width:100%;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:140px 20px 100px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* ICE LIGHTS */
+
+.hero::before{
+    content:'';
+    position:absolute;
+
+    width:800px;
+    height:800px;
+
+    background:
+    radial-gradient(circle,#5fd2ff33,transparent 70%);
+
+    top:-250px;
+    right:-250px;
+
+    filter:blur(40px);
+}
+
+.hero::after{
+    content:'';
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:
+    radial-gradient(circle,#ffffff10,transparent 70%);
+
+    bottom:-250px;
+    left:-250px;
+
+    filter:blur(50px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+}
+
+.hero h1{
+
+    font-size:110px;
+    line-height:0.95;
+    margin-bottom:35px;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    color:white;
+
+    text-shadow:
+    0 0 8px rgba(180,230,255,0.35),
+    0 0 18px rgba(0,140,255,0.25);
+
+}
+
+/* 3D ICE TEXT */
+
+.hero h1 span{
+    display:block;
+
+    transform:
+    perspective(500px)
+    rotateX(6deg);
+
+}
+
+.hero p{
+    font-size:22px;
+    line-height:1.8;
+
+    color:  #cfe9ff;
+
+    max-width:850px;
+    margin:auto auto 45px;
+}
+
+.hero button{
+
+    padding:20px 46px;
+
+    border:none;
+    border-radius:60px;
+
+    font-size:18px;
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        135deg,
+        #62d5ff,
+        #1b8fff
+    );
+
+    box-shadow:
+    0 0 30px rgba(0,170,255,0.35),
+    inset 0 0 20px rgba(255,255,255,0.25);
+
+    transition:0.4s;
+}
+
+.hero button:hover{
+
+    transform:
+    translateY(-5px)
+    scale(1.03);
+
+    box-shadow:
+    0 0 45px rgba(0,180,255,0.55),
+    inset 0 0 25px rgba(255,255,255,0.3);
+}
+
+/* ===== SECTION ===== */
+
+section{
+    padding:120px 80px;
+    position:relative;
+}
+
+.section-title{
+
+    text-align:center;
+
+    font-size:54px;
+    margin-bottom:70px;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(to right,#ffffff,#9de2ff);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* ===== CARDS ===== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+}
+
+.card{
+
+    position:relative;
+
+    padding:45px;
+
+    border-radius:35px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.12),
+        rgba(255,255,255,0.04)
+    );
+
+    backdrop-filter:blur(20px);
+
+    border:
+    1px solid rgba(255,255,255,0.12);
+
+    overflow:hidden;
+
+    transition:0.45s;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.25);
+}
+
+/* ICE REFLECTION */
+
+.card::before{
+    content:'';
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    background:
+    radial-gradient(circle,#9fe7ff22,transparent 70%);
+
+    top:-80px;
+    right:-80px;
+}
+
+.card:hover{
+
+    transform:
+    translateY(-12px)
+    rotateX(4deg);
+
+    box-shadow:
+    0 25px 50px rgba(0,0,0,0.35),
+    0 0 35px rgba(80,200,255,0.18);
+}
+
+.card h3{
+
+    font-size:28px;
+    margin-bottom:20px;
+
+    color:#dff6ff;
+}
+
+.card p{
+
+    color:#bdd9ea;
+
+    line-height:1.8;
+}
+
+/* ===== GALLERY ===== */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+}
+
+.gallery img{
+
+    width:100%;
+    height:320px;
+
+    object-fit:cover;
+
+    border-radius:30px;
+
+    transition:0.5s;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.3);
+}
+
+.gallery img:hover{
+
+    transform:
+    scale(1.03)
+    rotate(-1deg);
+
+    box-shadow:
+    0 20px 60px rgba(0,140,255,0.35);
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+
+    padding:70px 20px;
+
+    text-align:center;
+
+    color:#bdd9ea;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    background:
+    rgba(255,255,255,0.03);
+
+    backdrop-filter:blur(20px);
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:900px){
+
+    header{
+        padding:20px;
+        flex-direction:column;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:20px;
+    }
+
+    .hero h1{
+        font-size:62px;
+    }
+
+    .section-title{
+        font-size:42px;
+    }
+
+    section{
+        padding:90px 25px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+ICE CLIMBING
+</div>
+
+<nav>
+<a href="#home">Главная</a>
+<a href="#about">О спорте</a>
+<a href="#events">Соревнования</a>
+<a href="#gallery">Галерея</a>
+<a href="#contacts">Контакты</a>
+</nav>
+
+</header>
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h1>
+<span>ЛЕДОЛАЗАНИЕ</span>
+</h1>
+
+<p>
+Современный спорт высоты, силы и льда.  
+Соревнования, новости, спортсмены и мир вертикального экстрима.
+</p>
+
+<button>
+Смотреть соревнования
+</button>
+
+</div>
+
+</section>
+
+<section class="reveal" id="about">
+
+<h2 class="section-title">
+О ледолазании
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Что такое ледолазание?</h3>
+<p>
+Ледолазание — это экстремальный вид спорта, в котором спортсмены преодолевают вертикальные ледовые трассы с помощью ледовых инструментов и кошек. Спорт сочетает силу, выносливость, технику и концентрацию.
+</p>
+</div>
+
+<div class="card">
+<h3>Дисциплины</h3>
+<p>
+Существуют две основные дисциплины: скорость и трудность. В скорости спортсмены соревнуются на время, а в трудности проходят максимально сложные маршруты.
+</p>
+</div>
+
+<div class="card">
+<h3>Мировой спорт</h3>
+<p>
+Ледолазание развивается по всему миру и входит в программу международных соревнований UIAA. Ежегодно проходят этапы Кубка мира и чемпионаты Европы.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="reveal" id="events">
+
+<h2 class="section-title">
+Соревнования
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>UIAA Ice Climbing World Cup</h3>
+<p>
+Крупнейшая международная серия соревнований по ледолазанию. Этапы проходят в Южной Корее, Швейцарии, Франции и США.
+</p>
+</div>
+
+<div class="card">
+<h3>Чемпионат Европы 2024</h3>
+<p>
+Европейские спортсмены соревновались в дисциплинах скорость и трудность на искусственных ледовых конструкциях.
+</p>
+</div>
+
+<div class="card">
+<h3>Молодёжный Кубок</h3>
+<p>
+Серия соревнований для молодых спортсменов до 18 лет с целью развития ледолазания среди юниоров.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="reveal" id="gallery">
+
+<h2 class="section-title">
+Галерея
+</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1516239324214-58c0d3dc9c3d?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<section class="reveal" id="contacts">
+
+<h2 class="section-title">
+Контакты
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Федерация</h3>
+<p>
+Федерация альпинизма России<br><br>
+
+Телефон:<br>
++7 (953) 130-71-30<br><br>
+
+Email:<br>
+iceclimbingru@gmail.com
+</p>
+</div>
+
+<div class="card">
+<h3>Социальные сети</h3>
+<p>
+VK: vk.com/iceclimbingru<br><br>
+
+Telegram: t.me/iceclimbing<br><br>
+
+YouTube: Ice Climbing TV
+</p>
+</div>
+
+<div class="card">
+<h3>Адрес</h3>
+<p>
+г. Киров, спортивный комплекс “Трамплин"<br><br>
+
+Пн–Пт: 10:00 – 20:00<br><br>
+
+Сб–Вс: 11:00 – 18:00
+</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Ice Climbing Russian Federation
+</p>
+
+</footer>
+
+</body>
+</html>
