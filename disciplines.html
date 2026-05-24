@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ледолазание</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+ICE CLIMBING
+</div>
+
+<div class="burger">
+☰
+</div>
+
+<nav>
+
+<a href="index.html">
+Главная
+</a>
+
+<a href="world-cups.html">
+Международные старты
+</a>
+
+<a href="russian-comps.html">
+Российские старты
+</a>
+
+<a href="documents.html">
+Информация
+</a>
+
+</nav>
+
+</header>
+
+<section class="hero" id="home">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <div class="hero-left">
+
+        <h1>
+            ДИСЦИПЛИНЫ<br>
+            ЛЕДОЛАЗАНИЯ
+        </h1>
+
+        <p>
+            Скорость, трудность
+            и современные дисциплины
+            ледолазания.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="https://youtube.com"
+               target="_blank">
+
+               Смотреть соревнования
+
+            </a>
+
+            <a href="#events">
+
+               Ближайшие старты
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="hero-card-label">
+            Ближайшее событие
+        </div>
+
+        <h3>
+            Кубок России 2026
+        </h3>
+
+        <p>
+            Москва · 12–14 февраля
+        </p>
+
+        <div class="hero-card-line"></div>
+
+        <span>
+            Скорость · Трудность
+        </span>
+
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    ↓
+</div>
+
+</section>
+
+<section class="reveal" id="disciplines">
+
+<h2 class="section-title">
+Дисциплины
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Скорость
+</h3>
+
+<p>
+Спортсмены проходят вертикальную
+ледовую трассу на время.
+Побеждает участник, быстрее всех
+достигший вершины маршрута.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Трудность
+</h3>
+
+<p>
+Участники преодолевают сложные
+технические трассы с нависаниями,
+ледовыми рельефами и
+силовыми участками.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Комбинация
+</h3>
+
+<p>
+Некоторые турниры объединяют
+скорость и трудность,
+позволяя определить наиболее
+универсальных спортсменов.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Ice Climbing Russian Federation
+</p>
+
+</footer>
+
+<script>
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+function revealSections(){
+
+    const triggerBottom =
+    window.innerHeight * 0.95;
+
+    reveals.forEach(section => {
+
+        const sectionTop =
+        section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom){
+
+            section.classList.add('active');
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    'scroll',
+    revealSections
+);
+
+window.addEventListener(
+    'load',
+    revealSections
+);
+
+window.addEventListener(
+    'resize',
+    revealSections
+);
+
+revealSections();
+
+</script>
+
+<script>
+
+const burger =
+document.querySelector('.burger');
+
+const nav =
+document.querySelector('nav');
+
+burger.addEventListener('click', () => {
+
+    nav.classList.toggle('active');
+
+    if(nav.classList.contains('active')){
+
+        burger.innerHTML = '✕';
+
+    }else{
+
+        burger.innerHTML = '☰';
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

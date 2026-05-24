@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>История ледолазания</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+ICE CLIMBING
+</div>
+
+<div class="burger">
+☰
+</div>
+
+<nav>
+
+<a href="index.html">
+Главная
+</a>
+
+<a href="world-cups.html">
+Международные старты
+</a>
+
+<a href="russian-comps.html">
+Российские старты
+</a>
+
+<a href="documents.html">
+Информация
+</a>
+
+</nav>
+
+</header>
+
+<section class="hero hero-history" id="home">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <div class="hero-left">
+
+        <h1>
+            ИСТОРИЯ<br>
+            ЛЕДОЛАЗАНИЕЯ
+        </h1>
+
+        <p>
+            <p>
+            История развития ледолазания,
+            международных соревнований
+            и становления современного спорта.
+            </p>
+        </p>
+
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    ↓
+</div>
+
+</section>
+
+<section id="timeline">
+
+<h2 class="section-title">
+История ледолазания
+</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+1980s
+</div>
+
+<div class="timeline-content">
+
+<h3>
+Появление ледолазания
+</h3>
+
+<p>
+Первые соревнования по ледолазанию
+начали проводиться в Европе
+как часть альпинистской культуры.
+</p>
+
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+2000
+</div>
+
+<div class="timeline-content">
+
+<h3>
+Развитие международных стартов
+</h3>
+
+<p>
+Появляются регулярные
+международные соревнования
+и первые серии Кубка мира.
+</p>
+
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+2002
+</div>
+
+<div class="timeline-content">
+
+<h3>
+UIAA Ice Climbing World Tour
+</h3>
+
+<p>
+UIAA начинает активное развитие
+международной структуры
+соревнований по ледолазанию.
+</p>
+
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+Today
+</div>
+
+<div class="timeline-content">
+
+<h3>
+Современный спорт
+</h3>
+
+<p>
+Ледолазание развивается
+по всему миру и включает
+скорость, трудность и dry tooling.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Ice Climbing Russian Federation
+</p>
+
+</footer>
+
+<script>
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+function revealSections(){
+
+    const triggerBottom =
+    window.innerHeight * 0.95;
+
+    reveals.forEach(section => {
+
+        const sectionTop =
+        section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom){
+
+            section.classList.add('active');
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    'scroll',
+    revealSections
+);
+
+window.addEventListener(
+    'load',
+    revealSections
+);
+
+window.addEventListener(
+    'resize',
+    revealSections
+);
+
+revealSections();
+
+</script>
+
+<script>
+
+const burger =
+document.querySelector('.burger');
+
+const nav =
+document.querySelector('nav');
+
+burger.addEventListener('click', () => {
+
+    nav.classList.toggle('active');
+
+    if(nav.classList.contains('active')){
+
+        burger.innerHTML = '✕';
+
+    }else{
+
+        burger.innerHTML = '☰';
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
