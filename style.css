@@ -688,6 +688,12 @@ section{
 
     width:100%;
 
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
     min-width:0;
 
     border-radius:35px;
@@ -798,7 +804,9 @@ section{
 
     display:inline-block;
 
-    margin-top:25px;
+    margin-top:20px;
+
+    align-self:flex-start;
 
     padding:14px 26px;
 
