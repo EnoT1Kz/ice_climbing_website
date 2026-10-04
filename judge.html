@@ -34,9 +34,8 @@
 <body>
 
 <div class="header">
-    <h1>КВАЛИФИКАЦИЯ: СКОРОСТЬ</h1>
-    <p>Судейский пульт (Связь с сервером установлена)</p>
-    <button class="btn-reset" onclick="resetDB()">Загрузить стартовый список</button>
+    <h1>СКОРОСТЬ</h1>
+    <p>Судейский пульт</p>
 </div>
 
 <div class="container">
@@ -67,18 +66,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const athletesRef = ref(db, 'athletes');
-
-    // Функция сброса/инициализации базы данных
-    window.resetDB = function() {
-        const initialData = {
-            1: { id: 1, name: "Иванов Иван", number: "101", time: 0, status: "WAITING" },
-            2: { id: 2, name: "Петров Петр", number: "102", time: 0, status: "WAITING" },
-            3: { id: 3, name: "Сидоров Алексей", number: "103", time: 0, status: "WAITING" },
-            4: { id: 4, name: "Смирнов Дмитрий", number: "104", time: 0, status: "WAITING" },
-            5: { id: 5, name: "Кузнецов Олег", number: "105", time: 0, status: "WAITING" }
-        };
-        set(athletesRef, initialData).then(() => alert("Стартовый список загружен на сервер!"));
-    }
 
     // Слушатель базы данных в реальном времени
     onValue(athletesRef, (snapshot) => {
