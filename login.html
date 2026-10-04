@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вход в систему | Ice Climbing Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: linear-gradient(rgba(2,12,22,0.8), rgba(2,12,22,0.9)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1800&auto=format&fit=crop') center/cover;
+    }
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 30px;
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        text-align: center;
+    }
+    .login-card h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    .login-card p {
+        color: #8fdcff;
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #bdd9ea;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .input-group input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(0,0,0,0.2);
+        color: white;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+    }
+    .input-group input:focus {
+        border-color: #62d5ff;
+        background: rgba(0,0,0,0.4);
+    }
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(135deg, #62d5ff, #1b8fff);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 170, 255, 0.3);
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 25px;
+        color: #bdd9ea;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    .back-link:hover { color: white; }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <h2>Вход</h2>
+        <p>Для организаторов и судей</p>
+
+        <form action="dashboard.html" method="GET">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="judge@iceclimbing.ru" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Пароль</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
+
+            <!-- Пока эта кнопка просто перекидывает на dashboard.html -->
+            <button type="submit" class="login-btn">Войти в систему</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Вернуться на главную</a>
+    </div>
+</div>
+
+</body>
+</html>
