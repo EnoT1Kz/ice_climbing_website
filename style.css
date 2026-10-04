@@ -1271,3 +1271,19 @@ body{
         order: -1; 
     }
 }
+
+/* background for news.html */
+.hero-news {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 190px 20px 90px;
+    overflow: hidden;
+    background:
+    linear-gradient(rgba(2,12,22,0.72), rgba(2,12,22,0.82)),
+    url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1800&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}

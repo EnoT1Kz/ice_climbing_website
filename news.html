@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Новости ледолазания</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">ICE CLIMBING</div>
+    <div class="burger">☰</div>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="news.html">Новости</a>
+        <a href="world-cups.html">Международные старты</a>
+        <a href="russian-comps.html">Российские старты</a>
+        <a href="documents.html">Информация</a>
+    </nav>
+</header>
+
+<section class="hero hero-news" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-left">
+            <h1>
+                НОВОСТИ<br>
+                И СОБЫТИЯ
+            </h1>
+            <p>
+                Актуальные результаты соревнований, анонсы турниров, интервью со спортсменами и главные события из мира ледолазания.
+            </p>
+            <div class="hero-buttons">
+                <a href="#news-grid">Читать новости</a>
+                <a href="index.html">← На главную</a>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">↓</div>
+</section>
+
+<!-- СЕТКА НОВОСТЕЙ -->
+<section id="news-grid" class="reveal" style="padding: 100px 20px;">
+    <h2 class="section-title">Последние публикации</h2>
+    
+    <div class="cards">
+        
+        <div class="card">
+            <span style="color: #8fdcff; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin-bottom: 15px; display: block;">12 ОКТЯБРЯ 2026</span>
+            <h3>Сборная России начала подготовку к Кубку Мира</h3>
+            <p>На специализированной базе стартовали масштабные тренировочные сборы. В этом году особый акцент делается на скоростные прохождения и новые элементы драйтулинга.</p>
+            <a href="#" class="card-btn">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <span style="color: #8fdcff; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin-bottom: 15px; display: block;">05 ОКТЯБРЯ 2026</span>
+            <h3>Утвержден календарь соревнований на сезон</h3>
+            <p>Федерация альпинизма опубликовала официальный график этапов Кубка России. Первый этап традиционно примет Киров в середине декабря.</p>
+            <a href="#" class="card-btn">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <span style="color: #8fdcff; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin-bottom: 15px; display: block;">28 СЕНТЯБРЯ 2026</span>
+            <h3>Открыта регистрация на любительский фестиваль</h3>
+            <p>Приглашаем всех желающих попробовать свои силы на открытых стартах. Трассы подготовлены как для новичков, так и для опытных спортсменов.</p>
+            <a href="#" class="card-btn">Читать полностью</a>
+        </div>
+
+        <div class="card">
+            <span style="color: #8fdcff; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin-bottom: 15px; display: block;">15 СЕНТЯБРЯ 2026</span>
+            <h3>Обновление правил соревнований UIAA</h3>
+            <p>Международная федерация внесла ряд изменений в технический регламент экипировки. Новые требования к ледовым инструментам вступают в силу с 1 ноября.</p>
+            <a href="#" class="card-btn">Читать полностью</a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Ice Climbing Russian Federation</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+function revealSections(){
+    const triggerBottom = window.innerHeight * 0.95;
+    reveals.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if(sectionTop < triggerBottom){
+            section.classList.add('active');
+        }
+    });
+}
+window.addEventListener('scroll', revealSections);
+window.addEventListener('load', revealSections);
+window.addEventListener('resize', revealSections);
+revealSections();
+
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('nav');
+burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    if(nav.classList.contains('active')){
+        burger.innerHTML = '✕';
+    }else{
+        burger.innerHTML = '☰';
+    }
+});
+</script>
+
+</body>
+</html>
