@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ледолазание</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+ICE CLIMBING
+</div>
+
+<div class="burger">
+☰
+</div>
+
+<nav>
+
+<a href="index.html">
+Главная
+</a>
+
+<a href="world-cups.html">
+Международные старты
+</a>
+
+<a href="russian-comps.html">
+Российские старты
+</a>
+
+<a href="documents.html">
+Информация
+</a>
+
+</nav>
+
+</header>
+
+<section class="hero hero-other" id="home">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <div class="hero-left">
+
+        <h1>
+            КОММЕРЧЕСКИЕ<br>
+            ФЕСТИВАЛЬНЫЕ<br>
+            СТАРТЫ
+        </h1>
+
+        <p>
+        Фестивали,
+        outdoor-соревнования,
+        dry tooling events и открытые старты.
+        </p>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="hero-card-label">
+            Ближайшее событие
+        </div>
+
+        <h3>
+            Кубок России 2026
+        </h3>
+
+        <p>
+            Москва · 12–14 февраля
+        </p>
+
+        <div class="hero-card-line"></div>
+
+        <span>
+            Скорость · Трудность
+        </span>
+
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    ↓
+</div>
+
+</section>
+
+<section id="events">
+
+<h2 class="section-title">
+Другие соревнования
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Commercial Events
+</h3>
+
+<p>
+Коммерческие старты
+и шоу-соревнования
+по ледолазанию.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Dry Tool Competitions
+</h3>
+
+<p>
+Соревнования по dry tooling
+на скальных и искусственных
+трассах.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Festivals & Open Events
+</h3>
+
+<p>
+Фестивали, любительские старты
+и открытые мероприятия
+для спортсменов.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Ice Climbing Russian Federation
+</p>
+
+</footer>
+
+<script>
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+function revealSections(){
+
+    const triggerBottom =
+    window.innerHeight * 0.95;
+
+    reveals.forEach(section => {
+
+        const sectionTop =
+        section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom){
+
+            section.classList.add('active');
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    'scroll',
+    revealSections
+);
+
+window.addEventListener(
+    'load',
+    revealSections
+);
+
+window.addEventListener(
+    'resize',
+    revealSections
+);
+
+revealSections();
+
+</script>
+
+<script>
+
+const burger =
+document.querySelector('.burger');
+
+const nav =
+document.querySelector('nav');
+
+burger.addEventListener('click', () => {
+
+    nav.classList.toggle('active');
+
+    if(nav.classList.contains('active')){
+
+        burger.innerHTML = '✕';
+
+    }else{
+
+        burger.innerHTML = '☰';
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

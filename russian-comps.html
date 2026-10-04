@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ледолазание России</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+ICE CLIMBING
+</div>
+
+<div class="burger">
+☰
+</div>
+
+<nav>
+
+<a href="index.html">
+Главная
+</a>
+
+<a href="world-cups.html">
+Международные старты
+</a>
+
+<a href="russian-comps.html">
+Российские старты
+</a>
+
+<a href="documents.html">
+Информация
+</a>
+
+</nav>
+
+</header>
+
+<section class="hero hero-russia" id="home">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <div class="hero-left">
+
+        <h1>
+            ЛЕДОЛАЗАНИЕ<br>
+            РОССИИ
+        </h1>
+
+        <p>
+            Официальный портал ледолазания России:
+            соревнования, результаты, спортсмены,
+            новости и развитие ледового спорта.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="index.html">
+                ← На главную
+            </a>
+
+            <a href="#competitions">
+                Смотреть старты
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-card">
+
+        <div class="hero-card-label">
+            Ближайшее событие
+        </div>
+
+        <h3>
+            Кубок России 2026
+        </h3>
+
+        <p>
+            Москва · 12–14 февраля
+        </p>
+
+        <div class="hero-card-line"></div>
+
+        <span>
+            Скорость · Трудность
+        </span>
+
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    ↓
+</div>
+
+</section>
+
+<section id="events">
+
+<h2 class="section-title">
+Российские соревнования
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Кубок России
+</h3>
+
+<p>
+Главная серия национальных
+соревнований по ледолазанию.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Чемпионат России
+</h3>
+
+<p>
+Ежегодный чемпионат страны
+по дисциплинам скорость
+и трудность.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Молодёжные старты
+</h3>
+
+<p>
+Соревнования среди юниоров
+и молодых спортсменов.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="reveal" id="gallery">
+
+<h2 class="section-title">
+Галерея
+</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1516239324214-58c0d3dc9c3d?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<section class="reveal" id="contacts">
+
+<h2 class="section-title">
+Контакты
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Федерация</h3>
+<p>
+Федерация альпинизма России<br><br>
+
+Телефон:<br>
++7 (953) 130-71-30<br><br>
+
+Email:<br>
+iceclimbingru@gmail.com
+</p>
+</div>
+
+<div class="card">
+<h3>Социальные сети</h3>
+<p>
+VK: vk.com/iceclimbingru<br><br>
+
+Telegram: t.me/iceclimbing<br><br>
+
+YouTube: Ice Climbing TV
+</p>
+</div>
+
+<div class="card">
+<h3>Адрес</h3>
+<p>
+г. Киров, спортивный комплекс “Трамплин"<br><br>
+
+Пн–Пт: 10:00 – 20:00<br><br>
+
+Сб–Вс: 11:00 – 18:00
+</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Ice Climbing Russian Federation
+</p>
+
+</footer>
+
+<script>
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+function revealSections(){
+
+    const triggerBottom =
+    window.innerHeight * 0.95;
+
+    reveals.forEach(section => {
+
+        const sectionTop =
+        section.getBoundingClientRect().top;
+
+        if(sectionTop < triggerBottom){
+
+            section.classList.add('active');
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    'scroll',
+    revealSections
+);
+
+window.addEventListener(
+    'load',
+    revealSections
+);
+
+window.addEventListener(
+    'resize',
+    revealSections
+);
+
+revealSections();
+
+</script>
+
+<script>
+
+const burger =
+document.querySelector('.burger');
+
+const nav =
+document.querySelector('nav');
+
+burger.addEventListener('click', () => {
+
+    nav.classList.toggle('active');
+
+    if(nav.classList.contains('active')){
+
+        burger.innerHTML = '✕';
+
+    }else{
+
+        burger.innerHTML = '☰';
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
