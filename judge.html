@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Панель судьи | Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        background: #03111f;
+        padding: 20px;
+    }
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { color: #8fdcff; font-weight: 800; }
+    
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* ПАНЕЛЬ ВВОДА */
+    .judge-panel { display: flex; flex-direction: column; gap: 15px; }
+    .athlete-card {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 15px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.3s;
+    }
+    .athlete-card.done { border-color: #4caf50; background: rgba(76, 175, 80, 0.1); }
+    .athlete-card.fall { border-color: #f44336; background: rgba(244, 67, 54, 0.1); }
+    
+    .athlete-info h3 { font-size: 18px; margin-bottom: 5px; }
+    .athlete-info span { font-size: 12px; color: #8fdcff; }
+
+    .controls { display: flex; gap: 10px; }
+    input[type="number"] {
+        width: 90px; padding: 10px;
+        border-radius: 8px; border: none;
+        font-size: 18px; font-weight: 600; text-align: center;
+    }
+    button {
+        padding: 10px 15px; border: none; border-radius: 8px;
+        font-weight: 600; cursor: pointer; color: white; transition: 0.2s;
+    }
+    .btn-save { background: #1b8fff; }
+    .btn-save:hover { background: #62d5ff; }
+    .btn-fall { background: #f44336; }
+    .btn-fall:hover { background: #ff7961; }
+
+    /* LIVE ПРОТОКОЛ */
+    .live-protocol {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 15px;
+        padding: 20px;
+    }
+    .live-protocol h2 { margin-bottom: 20px; text-align: center; }
+    
+    .protocol-row {
+        display: flex; justify-content: space-between;
+        padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        font-size: 16px;
+    }
+    .protocol-row:last-child { border: none; }
+    .rank { font-weight: 800; color: #8fdcff; width: 30px; }
+    .time { font-weight: 800; font-family: monospace; font-size: 18px; }
+    .status-fall { color: #f44336; font-weight: 800; }
+
+    @media(max-width: 768px) {
+        .container { grid-template-columns: 1fr; }
+        .controls { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>КВАЛИФИКАЦИЯ: СКОРОСТЬ</h1>
+    <p>Судейский пульт (Демо)</p>
+</div>
+
+<div class="container">
+    <!-- Левая колонка: Пульт судьи -->
+    <div class="judge-panel" id="judge-panel">
+        <!-- Карточки генерируются через JS -->
+    </div>
+
+    <!-- Правая колонка: Экран для зрителей / Итоговый протокол -->
+    <div class="live-protocol">
+        <h2>Live-Протокол</h2>
+        <div id="protocol-list">
+            <!-- Результаты генерируются через JS -->
+        </div>
+    </div>
+</div>
+
+<script>
+// 1. База спортсменов (стартовый протокол)
+let athletes = [
+    { id: 1, name: "Иванов Иван", number: "101", time: null, status: "WAITING" },
+    { id: 2, name: "Петров Петр", number: "102", time: null, status: "WAITING" },
+    { id: 3, name: "Сидоров Алексей", number: "103", time: null, status: "WAITING" },
+    { id: 4, name: "Смирнов Дмитрий", number: "104", time: null, status: "WAITING" },
+    { id: 5, name: "Кузнецов Олег", number: "105", time: null, status: "WAITING" }
+];
+
+// 2. Отрисовка пульта судьи
+function renderJudgePanel() {
+    const panel = document.getElementById('judge-panel');
+    panel.innerHTML = '';
+
+    athletes.forEach(a => {
+        let cardClass = 'athlete-card';
+        if (a.status === 'OK') cardClass += ' done';
+        if (a.status === 'FALL') cardClass += ' fall';
+
+        panel.innerHTML += `
+            <div class="${cardClass}">
+                <div class="athlete-info">
+                    <h3>${a.name}</h3>
+                    <span>Номер: ${a.number}</span>
+                </div>
+                <div class="controls">
+                    <input type="number" id="time-${a.id}" step="0.01" placeholder="0.00" 
+                        ${a.status !== 'WAITING' ? 'disabled' : ''} 
+                        value="${a.time || ''}">
+                    <button class="btn-save" onclick="saveResult(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Ввод</button>
+                    <button class="btn-fall" onclick="markFall(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Срыв</button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// 3. Сохранение времени
+function saveResult(id) {
+    const input = document.getElementById(`time-${id}`);
+    const timeVal = parseFloat(input.value);
+    
+    if (isNaN(timeVal)) {
+        alert("Введите корректное время!"); return;
+    }
+
+    let athlete = athletes.find(a => a.id === id);
+    athlete.time = timeVal;
+    athlete.status = 'OK';
+    
+    updateAll();
+}
+
+// 4. Фиксация срыва
+function markFall(id) {
+    let athlete = athletes.find(a => a.id === id);
+    athlete.time = 999; // Условное огромное время для сортировки
+    athlete.status = 'FALL';
+    
+    updateAll();
+}
+
+// 5. Отрисовка Live-протокола (с сортировкой)
+function renderProtocol() {
+    const list = document.getElementById('protocol-list');
+    list.innerHTML = '';
+
+    // Отфильтруем тех, кто еще не стартовал
+    let finished = athletes.filter(a => a.status !== 'WAITING');
+
+    // ТА САМАЯ МАГИЯ СОРТИРОВКИ
+    finished.sort((a, b) => {
+        if (a.status === "FALL" && b.status !== "FALL") return 1;
+        if (b.status === "FALL" && a.status !== "FALL") return -1;
+        if (a.time === b.time) return Math.random() - 0.5; // Рандом при равном времени
+        return a.time - b.time;
+    });
+
+    finished.forEach((a, index) => {
+        let displayTime = a.status === 'FALL' ? '<span class="status-fall">СРЫВ</span>' : `${a.time.toFixed(2)} с`;
+        
+        list.innerHTML += `
+            <div class="protocol-row">
+                <div>
+                    <span class="rank">${index + 1}.</span> 
+                    ${a.name}
+                </div>
+                <div class="time">${displayTime}</div>
+            </div>
+        `;
+    });
+}
+
+// Обновление обоих экранов
+function updateAll() {
+    renderJudgePanel();
+    renderProtocol();
+}
+
+// Запуск при загрузке
+updateAll();
+</script>
+
+</body>
+</html>
