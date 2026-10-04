@@ -7,206 +7,152 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: 'Montserrat', sans-serif;
-        color: white;
-        background: #03111f;
-        padding: 20px;
-    }
+    body { font-family: 'Montserrat', sans-serif; color: white; background: #03111f; padding: 20px; }
     .header { text-align: center; margin-bottom: 30px; }
     .header h1 { color: #8fdcff; font-weight: 800; }
-    
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    /* ПАНЕЛЬ ВВОДА */
+    .btn-reset { background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    .container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
     .judge-panel { display: flex; flex-direction: column; gap: 15px; }
-    .athlete-card {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 15px;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: 0.3s;
-    }
+    .athlete-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
     .athlete-card.done { border-color: #4caf50; background: rgba(76, 175, 80, 0.1); }
     .athlete-card.fall { border-color: #f44336; background: rgba(244, 67, 54, 0.1); }
-    
     .athlete-info h3 { font-size: 18px; margin-bottom: 5px; }
     .athlete-info span { font-size: 12px; color: #8fdcff; }
-
     .controls { display: flex; gap: 10px; }
-    input[type="number"] {
-        width: 90px; padding: 10px;
-        border-radius: 8px; border: none;
-        font-size: 18px; font-weight: 600; text-align: center;
-    }
-    button {
-        padding: 10px 15px; border: none; border-radius: 8px;
-        font-weight: 600; cursor: pointer; color: white; transition: 0.2s;
-    }
+    input[type="number"] { width: 90px; padding: 10px; border-radius: 8px; border: none; font-size: 18px; font-weight: 600; text-align: center; }
+    button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: white; }
     .btn-save { background: #1b8fff; }
-    .btn-save:hover { background: #62d5ff; }
     .btn-fall { background: #f44336; }
-    .btn-fall:hover { background: #ff7961; }
-
-    /* LIVE ПРОТОКОЛ */
-    .live-protocol {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-        border-radius: 15px;
-        padding: 20px;
-    }
+    .live-protocol { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; }
     .live-protocol h2 { margin-bottom: 20px; text-align: center; }
-    
-    .protocol-row {
-        display: flex; justify-content: space-between;
-        padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1);
-        font-size: 16px;
-    }
-    .protocol-row:last-child { border: none; }
+    .protocol-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; }
     .rank { font-weight: 800; color: #8fdcff; width: 30px; }
     .time { font-weight: 800; font-family: monospace; font-size: 18px; }
     .status-fall { color: #f44336; font-weight: 800; }
-
-    @media(max-width: 768px) {
-        .container { grid-template-columns: 1fr; }
-        .controls { flex-direction: column; }
-    }
 </style>
 </head>
 <body>
 
 <div class="header">
     <h1>КВАЛИФИКАЦИЯ: СКОРОСТЬ</h1>
-    <p>Судейский пульт (Демо)</p>
+    <p>Судейский пульт (Связь с сервером установлена)</p>
+    <button class="btn-reset" onclick="resetDB()">Загрузить стартовый список</button>
 </div>
 
 <div class="container">
-    <!-- Левая колонка: Пульт судьи -->
-    <div class="judge-panel" id="judge-panel">
-        <!-- Карточки генерируются через JS -->
-    </div>
-
-    <!-- Правая колонка: Экран для зрителей / Итоговый протокол -->
+    <div class="judge-panel" id="judge-panel">Установка соединения...</div>
     <div class="live-protocol">
         <h2>Live-Протокол</h2>
-        <div id="protocol-list">
-            <!-- Результаты генерируются через JS -->
-        </div>
+        <div id="protocol-list">Ожидание данных...</div>
     </div>
 </div>
 
-<script>
-// 1. База спортсменов (стартовый протокол)
-let athletes = [
-    { id: 1, name: "Иванов Иван", number: "101", time: null, status: "WAITING" },
-    { id: 2, name: "Петров Петр", number: "102", time: null, status: "WAITING" },
-    { id: 3, name: "Сидоров Алексей", number: "103", time: null, status: "WAITING" },
-    { id: 4, name: "Смирнов Дмитрий", number: "104", time: null, status: "WAITING" },
-    { id: 5, name: "Кузнецов Олег", number: "105", time: null, status: "WAITING" }
-];
+<!-- Подключаем Firebase как модуль -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-// 2. Отрисовка пульта судьи
-function renderJudgePanel() {
-    const panel = document.getElementById('judge-panel');
-    panel.innerHTML = '';
+    // Твои настройки из Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDBM4sSImsocLqYETY491XnA9WqwsN_iko",
+        authDomain: "ice-climbing-live.firebaseapp.com",
+        databaseURL: "https://ice-climbing-live-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "ice-climbing-live",
+        storageBucket: "ice-climbing-live.firebasestorage.app",
+        messagingSenderId: "1077681693342",
+        appId: "1:1077681693342:web:b068d2b90548af0888918f",
+        measurementId: "G-LDDYRM9S9J"
+    };
 
-    athletes.forEach(a => {
-        let cardClass = 'athlete-card';
-        if (a.status === 'OK') cardClass += ' done';
-        if (a.status === 'FALL') cardClass += ' fall';
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const athletesRef = ref(db, 'athletes');
 
-        panel.innerHTML += `
-            <div class="${cardClass}">
-                <div class="athlete-info">
-                    <h3>${a.name}</h3>
-                    <span>Номер: ${a.number}</span>
-                </div>
-                <div class="controls">
-                    <input type="number" id="time-${a.id}" step="0.01" placeholder="0.00" 
-                        ${a.status !== 'WAITING' ? 'disabled' : ''} 
-                        value="${a.time || ''}">
-                    <button class="btn-save" onclick="saveResult(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Ввод</button>
-                    <button class="btn-fall" onclick="markFall(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Срыв</button>
-                </div>
-            </div>
-        `;
-    });
-}
-
-// 3. Сохранение времени
-function saveResult(id) {
-    const input = document.getElementById(`time-${id}`);
-    const timeVal = parseFloat(input.value);
-    
-    if (isNaN(timeVal)) {
-        alert("Введите корректное время!"); return;
+    // Функция сброса/инициализации базы данных
+    window.resetDB = function() {
+        const initialData = {
+            1: { id: 1, name: "Иванов Иван", number: "101", time: 0, status: "WAITING" },
+            2: { id: 2, name: "Петров Петр", number: "102", time: 0, status: "WAITING" },
+            3: { id: 3, name: "Сидоров Алексей", number: "103", time: 0, status: "WAITING" },
+            4: { id: 4, name: "Смирнов Дмитрий", number: "104", time: 0, status: "WAITING" },
+            5: { id: 5, name: "Кузнецов Олег", number: "105", time: 0, status: "WAITING" }
+        };
+        set(athletesRef, initialData).then(() => alert("Стартовый список загружен на сервер!"));
     }
 
-    let athlete = athletes.find(a => a.id === id);
-    athlete.time = timeVal;
-    athlete.status = 'OK';
-    
-    updateAll();
-}
+    // Слушатель базы данных в реальном времени
+    onValue(athletesRef, (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
 
-// 4. Фиксация срыва
-function markFall(id) {
-    let athlete = athletes.find(a => a.id === id);
-    athlete.time = 999; // Условное огромное время для сортировки
-    athlete.status = 'FALL';
-    
-    updateAll();
-}
-
-// 5. Отрисовка Live-протокола (с сортировкой)
-function renderProtocol() {
-    const list = document.getElementById('protocol-list');
-    list.innerHTML = '';
-
-    // Отфильтруем тех, кто еще не стартовал
-    let finished = athletes.filter(a => a.status !== 'WAITING');
-
-    // ТА САМАЯ МАГИЯ СОРТИРОВКИ
-    finished.sort((a, b) => {
-        if (a.status === "FALL" && b.status !== "FALL") return 1;
-        if (b.status === "FALL" && a.status !== "FALL") return -1;
-        if (a.time === b.time) return Math.random() - 0.5; // Рандом при равном времени
-        return a.time - b.time;
+        const athletes = Object.values(data);
+        renderJudgePanel(athletes);
+        renderProtocol(athletes);
     });
 
-    finished.forEach((a, index) => {
-        let displayTime = a.status === 'FALL' ? '<span class="status-fall">СРЫВ</span>' : `${a.time.toFixed(2)} с`;
-        
-        list.innerHTML += `
-            <div class="protocol-row">
-                <div>
-                    <span class="rank">${index + 1}.</span> 
-                    ${a.name}
+    function renderJudgePanel(athletes) {
+        const panel = document.getElementById('judge-panel');
+        panel.innerHTML = '';
+
+        athletes.forEach(a => {
+            let cardClass = 'athlete-card';
+            if (a.status === 'OK') cardClass += ' done';
+            if (a.status === 'FALL') cardClass += ' fall';
+
+            panel.innerHTML += `
+                <div class="${cardClass}">
+                    <div class="athlete-info">
+                        <h3>${a.name}</h3>
+                        <span>Номер: ${a.number}</span>
+                    </div>
+                    <div class="controls">
+                        <input type="number" id="time-${a.id}" step="0.01" placeholder="0.00" 
+                            ${a.status !== 'WAITING' ? 'disabled' : ''} 
+                            value="${a.time > 0 ? a.time : ''}">
+                        <button class="btn-save" onclick="saveResult(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Ввод</button>
+                        <button class="btn-fall" onclick="markFall(${a.id})" ${a.status !== 'WAITING' ? 'disabled' : ''}>Срыв</button>
+                    </div>
                 </div>
-                <div class="time">${displayTime}</div>
-            </div>
-        `;
-    });
-}
+            `;
+        });
+    }
 
-// Обновление обоих экранов
-function updateAll() {
-    renderJudgePanel();
-    renderProtocol();
-}
+    // Функции сохранения, отправляющие данные на сервер Google
+    window.saveResult = function(id) {
+        const input = document.getElementById(`time-${id}`);
+        const timeVal = parseFloat(input.value);
+        if (isNaN(timeVal)) { alert("Введите время!"); return; }
+        
+        update(ref(db, 'athletes/' + id), { time: timeVal, status: 'OK' });
+    }
 
-// Запуск при загрузке
-updateAll();
+    window.markFall = function(id) {
+        update(ref(db, 'athletes/' + id), { time: 999, status: 'FALL' });
+    }
+
+    function renderProtocol(athletes) {
+        const list = document.getElementById('protocol-list');
+        list.innerHTML = '';
+        let finished = athletes.filter(a => a.status !== 'WAITING');
+
+        // Алгоритм сортировки
+        finished.sort((a, b) => {
+            if (a.status === "FALL" && b.status !== "FALL") return 1;
+            if (b.status === "FALL" && a.status !== "FALL") return -1;
+            if (a.time === b.time) return Math.random() - 0.5;
+            return a.time - b.time;
+        });
+
+        finished.forEach((a, index) => {
+            let displayTime = a.status === 'FALL' ? '<span class="status-fall">СРЫВ</span>' : `${a.time.toFixed(2)} с`;
+            list.innerHTML += `
+                <div class="protocol-row">
+                    <div><span class="rank">${index + 1}.</span> ${a.name}</div>
+                    <div class="time">${displayTime}</div>
+                </div>
+            `;
+        });
+    }
 </script>
-
 </body>
 </html>

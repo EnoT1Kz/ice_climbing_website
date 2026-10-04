@@ -7,113 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-    .scoreboard-container {
-        max-width: 1000px;
-        margin: 140px auto 60px;
-        padding: 0 20px;
-        min-height: calc(100vh - 200px);
-    }
-    
-    .board-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    .board-header h1 {
-        font-size: 42px;
-        font-weight: 800;
-        color: white;
-        text-shadow: 0 0 20px rgba(98, 213, 255, 0.3);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-    .board-header p {
-        color: #8fdcff;
-        font-size: 18px;
-        margin-top: 10px;
-        font-weight: 600;
-    }
-
-    .board-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-
-    .board-row {
-        display: grid;
-        grid-template-columns: 80px 1fr 100px 150px;
-        padding: 20px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        align-items: center;
-        transition: 0.3s;
-    }
-    .board-row:hover {
-        background: rgba(255,255,255,0.05);
-    }
-    .board-row:last-child {
-        border-bottom: none;
-    }
-
-    /* Заголовок таблицы */
-    .header-row {
-        background: rgba(0,0,0,0.3);
-        color: #8fdcff;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 700;
-        border-bottom: 2px solid rgba(255,255,255,0.1);
-    }
-
-    /* Колонки */
-    .col-rank {
-        font-size: 24px;
-        font-weight: 800;
-        color: white;
-        text-align: center;
-    }
-    .col-name {
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-    }
-    .col-number {
-        font-size: 14px;
-        color: #bdd9ea;
-        text-align: center;
-    }
-    .col-time {
-        font-size: 26px;
-        font-weight: 800;
-        font-family: monospace; /* Моноширинный шрифт для цифр */
-        text-align: right;
-        color: #62d5ff;
-    }
-    
-    /* Статусы */
-    .status-fall {
-        color: #f44336;
-    }
-    .rank-gold {
-        color: #ffd700;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    }
+    .scoreboard-container { max-width: 1000px; margin: 140px auto 60px; padding: 0 20px; min-height: calc(100vh - 200px); }
+    .board-header { text-align: center; margin-bottom: 40px; }
+    .board-header h1 { font-size: 42px; font-weight: 800; color: white; text-shadow: 0 0 20px rgba(98, 213, 255, 0.3); }
+    .board-header p { color: #8fdcff; font-size: 18px; margin-top: 10px; font-weight: 600; }
+    .board-wrapper { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .board-row { display: grid; grid-template-columns: 120px 1fr 100px 180px; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
+    .header-row { background: rgba(0,0,0,0.3); color: #8fdcff; font-size: 12px; text-transform: uppercase; font-weight: 700; }
+    .col-rank { font-size: 24px; font-weight: 800; color: white; text-align: center; }
+    .col-name { font-size: 20px; font-weight: 600; color: white; }
+    .col-number { font-size: 14px; color: #bdd9ea; text-align: center; }
+    .col-time { font-size: 26px; font-weight: 800; font-family: monospace; text-align: right; color: #62d5ff; }
+    .status-fall { color: #f44336; }
+    .rank-gold { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
     .rank-silver { color: #e0e0e0; }
     .rank-bronze { color: #cd7f32; }
-
-    /* Адаптация для телефонов */
     @media(max-width: 600px) {
-        .board-row {
-            grid-template-columns: 50px 1fr 100px;
-            padding: 15px;
-        }
-        .col-number { display: none; } /* Прячем номер на маленьких экранах */
-        .col-name { font-size: 16px; }
-        .col-time { font-size: 20px; }
-        .board-header h1 { font-size: 28px; }
+        .board-row { grid-template-columns: 80px 1fr 130px; padding: 15px; }
+        .col-number { display: none; }
     }
 </style>
 </head>
@@ -142,10 +53,8 @@
             <div class="col-number">НОМЕР</div>
             <div class="col-time">ВРЕМЯ</div>
         </div>
-
-        <!-- Контейнер для списка результатов -->
         <div id="live-results">
-            <!-- Сюда JS загрузит результаты -->
+            <p style="text-align:center; padding: 20px; color: #bdd9ea;">Подключение к серверу...</p>
         </div>
     </div>
 </div>
@@ -154,46 +63,75 @@
     <p>© 2026 Ice Climbing Live System</p>
 </footer>
 
-<script>
-// Имитация базы данных (то, что прилетит с пульта судьи)
-const results = [
-    { rank: 1, name: "Сидоров Алексей", number: "103", time: "07.95", status: "OK" },
-    { rank: 2, name: "Иванов Иван", number: "101", time: "08.12", status: "OK" },
-    { rank: 3, name: "Кузнецов Олег", number: "105", time: "08.45", status: "OK" },
-    { rank: 4, name: "Попов Андрей", number: "107", time: "09.01", status: "OK" },
-    { rank: 5, name: "Смирнов Дмитрий", number: "104", time: "FALL", status: "FALL" },
-    { rank: 6, name: "Петров Петр", number: "102", time: "FALL", status: "FALL" }
-];
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const resultsContainer = document.getElementById('live-results');
+    // Настройки твоего проекта
+    const firebaseConfig = {
+        apiKey: "AIzaSyDBM4sSImsocLqYETY491XnA9WqwsN_iko",
+        authDomain: "ice-climbing-live.firebaseapp.com",
+        databaseURL: "https://ice-climbing-live-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "ice-climbing-live",
+        storageBucket: "ice-climbing-live.firebasestorage.app",
+        messagingSenderId: "1077681693342",
+        appId: "1:1077681693342:web:b068d2b90548af0888918f",
+        measurementId: "G-LDDYRM9S9J"
+    };
 
-results.forEach(athlete => {
-    let rankClass = "col-rank";
-    if (athlete.rank === 1) rankClass += " rank-gold";
-    if (athlete.rank === 2) rankClass += " rank-silver";
-    if (athlete.rank === 3) rankClass += " rank-bronze";
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const athletesRef = ref(db, 'athletes');
 
-    let timeDisplay = athlete.status === "FALL" 
-        ? `<span class="status-fall">СРЫВ</span>` 
-        : `${athlete.time} с`;
+    const resultsContainer = document.getElementById('live-results');
 
-    resultsContainer.innerHTML += `
-        <div class="board-row">
-            <div class="${rankClass}">${athlete.rank}</div>
-            <div class="col-name">${athlete.name}</div>
-            <div class="col-number">${athlete.number}</div>
-            <div class="col-time">${timeDisplay}</div>
-        </div>
-    `;
-});
+    onValue(athletesRef, (snapshot) => {
+        const data = snapshot.val();
+        if (!data) {
+            resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px; color: #bdd9ea;">Ожидание старта соревнований...</p>';
+            return;
+        }
 
-// Скрипт бургер-меню для мобилок
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('nav');
-burger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    burger.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
-});
+        let athletes = Object.values(data);
+        let finished = athletes.filter(a => a.status !== 'WAITING');
+
+        finished.sort((a, b) => {
+            if (a.status === "FALL" && b.status !== "FALL") return 1;
+            if (b.status === "FALL" && a.status !== "FALL") return -1;
+            if (a.time === b.time) return Math.random() - 0.5;
+            return a.time - b.time;
+        });
+
+        resultsContainer.innerHTML = '';
+
+        finished.forEach((athlete, index) => {
+            const rank = index + 1;
+            let rankClass = "col-rank";
+            if (rank === 1) rankClass += " rank-gold";
+            if (rank === 2) rankClass += " rank-silver";
+            if (rank === 3) rankClass += " rank-bronze";
+
+            let timeDisplay = athlete.status === "FALL" 
+                ? `<span class="status-fall">СРЫВ</span>` 
+                : `${athlete.time.toFixed(2)} с`;
+
+            resultsContainer.innerHTML += `
+                <div class="board-row">
+                    <div class="${rankClass}">${rank}</div>
+                    <div class="col-name">${athlete.name}</div>
+                    <div class="col-number">${athlete.number}</div>
+                    <div class="col-time">${timeDisplay}</div>
+                </div>
+            `;
+        });
+    });
+
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('nav');
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        burger.innerHTML = nav.classList.contains('active') ? '✕' : '☰';
+    });
 </script>
 
 </body>
