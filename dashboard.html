@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Личный кабинет | Ice Climbing Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    .dashboard-container {
+        padding: 140px 20px 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+    .welcome-block {
+        margin-bottom: 50px;
+    }
+    .welcome-block h1 {
+        font-size: 38px;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 10px;
+    }
+    .welcome-block p {
+        color: #8fdcff;
+        font-size: 16px;
+    }
+    
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+    
+    .dash-card {
+        background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 25px;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+    }
+    .dash-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        border-color: rgba(98, 213, 255, 0.3);
+    }
+    
+    .status-badge {
+        display: inline-block;
+        align-self: flex-start;
+        padding: 6px 12px;
+        background: rgba(76, 175, 80, 0.15);
+        color: #4caf50;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .dash-card h3 {
+        font-size: 24px;
+        color: white;
+        margin-bottom: 15px;
+    }
+    .dash-card p {
+        color: #bdd9ea;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        flex-grow: 1;
+    }
+    
+    .dash-btn {
+        text-align: center;
+        padding: 14px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+    .btn-primary {
+        background: linear-gradient(135deg, #62d5ff, #1b8fff);
+        color: white;
+    }
+    .btn-primary:hover {
+        box-shadow: 0 8px 20px rgba(0, 170, 255, 0.3);
+    }
+    .btn-secondary {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #8fdcff;
+    }
+    .btn-secondary:hover {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">ICE CLIMBING LIVE</div>
+    <nav>
+        <a href="index.html" style="color: #ff6b6b; font-weight: 600;">Выйти из аккаунта</a>
+    </nav>
+</header>
+
+<div class="dashboard-container">
+    <div class="welcome-block">
+        <h1>Панель управления</h1>
+        <p>Главный судья: Александр Иванов</p>
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <!-- Карточка активного соревнования -->
+        <div class="dash-card">
+            <span class="status-badge">● Идет сейчас</span>
+            <h3>Кубок России (Скорость)</h3>
+            <p>Этап: Квалификация. Требуется ввод результатов участников на трассе.</p>
+            <a href="judge.html" class="dash-btn btn-primary">Открыть пульт судьи →</a>
+        </div>
+
+        <!-- Заглушка для управления спортсменами -->
+        <div class="dash-card">
+            <h3 style="color: #8fdcff;">Спортсмены</h3>
+            <p>Добавление новых участников, редактирование стартовых номеров и распределение по группам.</p>
+            <a href="#" class="dash-btn btn-secondary">База (В разработке)</a>
+        </div>
+
+        <!-- Заглушка для экспорта протоколов -->
+        <div class="dash-card">
+            <h3 style="color: #8fdcff;">Экспорт протоколов</h3>
+            <p>Автоматическое формирование официального итогового протокола с печатями для Минспорта.</p>
+            <a href="#" class="dash-btn btn-secondary">Скачать PDF (В разработке)</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
